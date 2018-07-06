@@ -1,4 +1,4 @@
-import mongoose, { Schema } from 'mongoose'
+import mongoose, {Schema} from 'mongoose'
 
 const debtSchema = new Schema({
   bank: {
@@ -7,27 +7,31 @@ const debtSchema = new Schema({
     required: true
   },
   soul: {
-    type: String
+    type: Schema.ObjectId,
+    ref: 'User',
+    required: true
   },
   date: {
-    type: String
+    type: Date
   },
   rate: {
-    type: String
+    type: Number
   },
   debt: {
-    type: String
+    type: Number
   }
 }, {
   timestamps: true,
   toJSON: {
     virtuals: true,
-    transform: (obj, ret) => { delete ret._id }
+    transform: (obj, ret) => {
+      delete ret._id
+    }
   }
 })
 
 debtSchema.methods = {
-  view (full) {
+  view(full) {
     const view = {
       // simple view
       id: this.id,
