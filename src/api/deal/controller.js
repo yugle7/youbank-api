@@ -15,10 +15,13 @@ import {Debt} from '../debt'
 // }
 //
 const setDebt = () => (entity) => {
+  console.log(entity)
   if (entity) {
     const {bank, soul, type, deal, date} = entity
 
     let debt = Debt.find({bank: bank, soul: soul})
+    console.log(debt)
+
     if (!debt) {
       debt = Debt.create({
         bank: bank,
@@ -41,6 +44,8 @@ const setDebt = () => (entity) => {
     }
     debt.date = date
     debt.save()
+    console.log(debt)
+
     return entity
   }
   return null
