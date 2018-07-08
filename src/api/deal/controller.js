@@ -1,6 +1,6 @@
 import {success, notFound, authorOrAdmin} from '../../services/response/'
 import {Deal} from '.'
-import {Debt} from '../debt'
+// import {Debt} from '../debt'
 
 // const setDate = () => (entity) => {
 //   if (entity) {
