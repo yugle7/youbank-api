@@ -1,6 +1,6 @@
 import mongoose, {Schema} from 'mongoose'
 
-const debtSchema = new Schema({
+const dealSchema = new Schema({
   bank: {
     type: Schema.ObjectId,
     ref: 'User',
@@ -14,10 +14,10 @@ const debtSchema = new Schema({
   date: {
     type: Date
   },
-  rate: {
-    type: Number
+  type: {
+    type: String
   },
-  debt: {
+  deal: {
     type: Number
   }
 }, {
@@ -30,36 +30,26 @@ const debtSchema = new Schema({
   }
 })
 
-debtSchema.methods = {
-  get (date) {
-    const t = (date - this.date) / 86400000
-    const k = 365 / 12
-    const m = Math.floor(t / k)
-    const d = t - k * m
-
-    if (this.rate && this.debt) {
-      return this.debt * (1 + this.rate * d / k) * Math.pow(1 + this.rate, m)
-    }
-    return this.debt
-  },
-  view (full) {
+dealSchema.methods = {
+  view(full) {
     const view = {
       // simple view
       id: this.id,
       bank: this.bank.view(full),
       soul: this.soul,
       date: this.date,
-      rate: this.rate,
-      debt: this.debt
+      type: this.type,
+      deal: this.deal
     }
+
     return full ? {
-      ...view,
-      now: this.get(new Date())
+      ...view
+      // add properties for a full view
     } : view
   }
 }
 
-const model = mongoose.model('Debt', debtSchema)
+const model = mongoose.model('Deal', dealSchema)
 
 export const schema = model.schema
 export default model
