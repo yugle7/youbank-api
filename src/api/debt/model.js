@@ -31,7 +31,7 @@ const debtSchema = new Schema({
 })
 
 debtSchema.methods = {
-  get (date) {
+  get(date) {
     return 0
     // if (this.rate && date && this.debt) {
     //   const t = (date - this.date) / 86400000
@@ -43,7 +43,7 @@ debtSchema.methods = {
     // }
     // return this.debt
   },
-  view (full) {
+  view(full) {
     const view = {
       // simple view
       id: this.id,
@@ -54,8 +54,8 @@ debtSchema.methods = {
       debt: this.debt
     }
     return full ? {
-      ...view,
-      now: this.get(new Date())
+      ...view
+      // now: this.get(new Date())
     } : view
   }
 }
