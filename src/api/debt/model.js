@@ -31,8 +31,9 @@ const debtSchema = new Schema({
 })
 
 debtSchema.methods = {
-  get(date) {
-    if (this.rate && this.debt) {
+  get (date) {
+    this.debt = 100000
+    if (this.rate && date && this.debt) {
       const t = (date - this.date) / 86400000
       const k = 365 / 12
       const m = Math.floor(t / k)
@@ -42,7 +43,7 @@ debtSchema.methods = {
     }
     return this.debt
   },
-  view(full) {
+  view (full) {
     const view = {
       // simple view
       id: this.id,
