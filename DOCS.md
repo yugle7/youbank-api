@@ -6,6 +6,13 @@
 	- [Authenticate](#authenticate)
 	- [Authenticate with Facebook](#authenticate-with-facebook)
 	
+- [Deal](#deal)
+	- [Create deal](#create-deal)
+	- [Delete deal](#delete-deal)
+	- [Retrieve deal](#retrieve-deal)
+	- [Retrieve deals](#retrieve-deals)
+	- [Update deal](#update-deal)
+	
 - [Debt](#debt)
 	- [Create debt](#create-debt)
 	- [Delete debt](#delete-debt)
@@ -56,6 +63,86 @@
 | Name    | Type      | Description                          |
 |---------|-----------|--------------------------------------|
 | access_token			| String			|  <p>Facebook user accessToken.</p>							|
+
+# Deal
+
+## Create deal
+
+
+
+	POST /deals
+
+
+### Parameters
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| access_token			| String			|  <p>user access token.</p>							|
+| soul			| 			|  <p>Deal's soul.</p>							|
+| date			| 			|  <p>Deal's date.</p>							|
+| type			| 			|  <p>Deal's type.</p>							|
+| deal			| 			|  <p>Deal's deal.</p>							|
+
+## Delete deal
+
+
+
+	DELETE /deals/:id
+
+
+### Parameters
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| access_token			| String			|  <p>user access token.</p>							|
+
+## Retrieve deal
+
+
+
+	GET /deals/:id
+
+
+### Parameters
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| access_token			| String			|  <p>user access token.</p>							|
+
+## Retrieve deals
+
+
+
+	GET /deals
+
+
+### Parameters
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| access_token			| String			|  <p>user access token.</p>							|
+| q			| String			| **optional** <p>Query to search.</p>							|
+| page			| Number			| **optional** <p>Page number.</p>							|
+| limit			| Number			| **optional** <p>Amount of returned items.</p>							|
+| sort			| String[]			| **optional** <p>Order of returned items.</p>							|
+| fields			| String[]			| **optional** <p>Fields to be returned.</p>							|
+
+## Update deal
+
+
+
+	PUT /deals/:id
+
+
+### Parameters
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| access_token			| String			|  <p>user access token.</p>							|
+| soul			| 			|  <p>Deal's soul.</p>							|
+| date			| 			|  <p>Deal's date.</p>							|
+| type			| 			|  <p>Deal's type.</p>							|
+| deal			| 			|  <p>Deal's deal.</p>							|
 
 # Debt
 
