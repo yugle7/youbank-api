@@ -54,8 +54,8 @@ debtSchema.methods = {
       debt: this.debt
     }
     return full ? {
-      ...view
-      // now: this.get(new Date())
+      ...view,
+      now: '2745' // this.get(new Date())
     } : view
   }
 }
