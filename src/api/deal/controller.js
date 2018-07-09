@@ -2,60 +2,38 @@ import {success, notFound, authorOrAdmin} from '../../services/response/'
 import {Deal} from '.'
 import {Debt} from '../debt'
 
-// const setDate = () => (entity) => {
-//   if (entity) {
-//     if (entity.date === null) {
-//       entity.date = new Date()
-//       entity.save()
-//       return entity
-//     }
-//     return entity
-//   }
-//   return null
-// }
-//
-const setDebt = () => (entity) => {
-  console.log(entity)
+const setDebt = (entity) => {
   if (entity) {
     const {bank, soul, type, deal, date} = entity
 
-    let debt = Debt.find({bank: bank, soul: soul})
-    console.log(debt)
-
-    if (!debt) {
-      debt = Debt.create({
-        bank: bank,
-        soul: soul,
-        debt: 0,
-        rate: 0,
-        date: date
-      })
-    }
-
-    debt.debt = debt.get(date)
-    if (type === '%') {
-      debt.rate = deal
-    } else if (type === '-') {
-      debt.debt -= deal
-    } else if (type === '+') {
-      debt.debt += deal
-    } else if (type === '=') {
-      debt.debt = deal
-    }
-    debt.date = date
-    debt.save()
-    console.log(debt)
-
+    Debt.findOne({bank: bank.id, soul: soul}, function (err, res) {
+      if (!err) {
+        if (!res) {
+          res = new Debt({bank: bank.id, soul: soul})
+          res.save()
+        }
+        res.debt = res.getDebt(date)
+        if (type === '%') {
+          res.rate = deal
+        } else if (type === '-') {
+          res.debt -= deal
+        } else if (type === '+') {
+          res.debt += deal
+        } else if (type === '=') {
+          res.debt = deal
+        }
+        res.date = date
+        res.save()
+      }
+    })
     return entity
   }
-  return null
 }
 
 export const create = ({user, bodymen: {body}}, res, next) =>
   Deal.create({...body, bank: user})
     .then((deal) => deal.view(true))
-    // .then(setDate())
-    .then(setDebt())
+    .then(setDebt)
     .then(success(res, 201))
     .catch(next)
 

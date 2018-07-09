@@ -16,10 +16,10 @@ const {soul, date, type, deal} = schema.tree
  * @apiGroup Deal
  * @apiPermission user
  * @apiParam {String} access_token user access token.
- * @apiParam soul Deal's soul.
- * @apiParam date Deal's date.
- * @apiParam type Deal's type.
- * @apiParam deal Deal's deal.
+ * @apiParam {User} soul Должник
+ * @apiParam {Date} date Дата
+ * @apiParam {String} type Тип
+ * @apiParam {Number} deal Размер
  * @apiSuccess {Object} deal Deal's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Deal not found.
@@ -67,10 +67,10 @@ router.get('/:id',
  * @apiGroup Deal
  * @apiPermission user
  * @apiParam {String} access_token user access token.
- * @apiParam soul Deal's soul.
- * @apiParam date Deal's date.
- * @apiParam type Deal's type.
- * @apiParam deal Deal's deal.
+ * @apiParam {User} soul Должник
+ * @apiParam {Date} date Дата
+ * @apiParam {String} type Тип
+ * @apiParam {Number} deal Размер
  * @apiSuccess {Object} deal Deal's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Deal not found.

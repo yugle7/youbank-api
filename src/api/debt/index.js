@@ -1,13 +1,14 @@
-import { Router } from 'express'
-import { middleware as query } from 'querymen'
-import { middleware as body } from 'bodymen'
-import { token } from '../../services/passport'
-import { create, index, show, update, destroy } from './controller'
-import { schema } from './model'
-export Debt, { schema } from './model'
+import {Router} from 'express'
+import {middleware as query} from 'querymen'
+import {middleware as body} from 'bodymen'
+import {token} from '../../services/passport'
+import {create, index, show, update, destroy, showDeals} from './controller'
+import {schema} from './model'
+
+export Debt, {schema} from './model'
 
 const router = new Router()
-const { soul, date, rate, debt } = schema.tree
+const {soul, date, rate, debt} = schema.tree
 
 /**
  * @api {post} /debts Create debt
@@ -15,18 +16,18 @@ const { soul, date, rate, debt } = schema.tree
  * @apiGroup Debt
  * @apiPermission user
  * @apiParam {String} access_token user access token.
- * @apiParam soul Debt's soul.
- * @apiParam date Debt's date.
- * @apiParam rate Debt's rate.
- * @apiParam debt Debt's debt.
+ * @apiParam {User} soul Должник
+ * @apiParam {Date} date Дата последней сделки
+ * @apiParam {Number} rate Ставка
+ * @apiParam {Number} debt Долг
  * @apiSuccess {Object} debt Debt's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Debt not found.
  * @apiError 401 user access only.
  */
 router.post('/',
-  token({ required: true }),
-  body({ soul, date, rate, debt }),
+  token({required: true}),
+  body({soul, date, rate, debt}),
   create)
 
 /**
@@ -41,7 +42,7 @@ router.post('/',
  * @apiError 401 user access only.
  */
 router.get('/',
-  token({ required: true }),
+  token({required: true}),
   query(),
   index)
 
@@ -57,8 +58,23 @@ router.get('/',
  * @apiError 401 user access only.
  */
 router.get('/:id',
-  token({ required: true }),
+  token({required: true}),
   show)
+
+/**
+ * @api {get} /debts/:id/deals История долга
+ * @apiName RetrieveDealsOfDebt
+ * @apiGroup Debt
+ * @apiPermission user
+ * @apiParam {String} access_token user access token.
+ * @apiSuccess {Object} debt Debt's data.
+ * @apiError {Object} 400 Some parameters may contain invalid values.
+ * @apiError 404 Debt not found.
+ * @apiError 401 user access only.
+ */
+router.get('/:id/deals',
+  token({required: true}),
+  showDeals)
 
 /**
  * @api {put} /debts/:id Update debt
@@ -66,18 +82,18 @@ router.get('/:id',
  * @apiGroup Debt
  * @apiPermission user
  * @apiParam {String} access_token user access token.
- * @apiParam soul Debt's soul.
- * @apiParam date Debt's date.
- * @apiParam rate Debt's rate.
- * @apiParam debt Debt's debt.
+ * @apiParam {User} soul Должник
+ * @apiParam {Date} date Дата последней сделки
+ * @apiParam {Number} rate Ставка
+ * @apiParam {Number} debt Долг
  * @apiSuccess {Object} debt Debt's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Debt not found.
  * @apiError 401 user access only.
  */
 router.put('/:id',
-  token({ required: true }),
-  body({ soul, date, rate, debt }),
+  token({required: true}),
+  body({soul, date, rate, debt}),
   update)
 
 /**
@@ -91,7 +107,7 @@ router.put('/:id',
  * @apiError 401 user access only.
  */
 router.delete('/:id',
-  token({ required: true }),
+  token({required: true}),
   destroy)
 
 export default router

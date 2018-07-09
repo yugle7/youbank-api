@@ -16,6 +16,7 @@
 - [Debt](#debt)
 	- [Create debt](#create-debt)
 	- [Delete debt](#delete-debt)
+	- [История долга](#история-долга)
 	- [Retrieve debt](#retrieve-debt)
 	- [Retrieve debts](#retrieve-debts)
 	- [Update debt](#update-debt)
@@ -23,7 +24,9 @@
 - [User](#user)
 	- [Create user](#create-user)
 	- [Delete user](#delete-user)
+	- [Я дал в долг](#я-дал-в-долг)
 	- [Retrieve current user](#retrieve-current-user)
+	- [Мне дали в долг](#мне-дали-в-долг)
 	- [Retrieve user](#retrieve-user)
 	- [Retrieve users](#retrieve-users)
 	- [Update password](#update-password)
@@ -78,10 +81,10 @@
 | Name    | Type      | Description                          |
 |---------|-----------|--------------------------------------|
 | access_token			| String			|  <p>user access token.</p>							|
-| soul			| 			|  <p>Deal's soul.</p>							|
-| date			| 			|  <p>Deal's date.</p>							|
-| type			| 			|  <p>Deal's type.</p>							|
-| deal			| 			|  <p>Deal's deal.</p>							|
+| soul			| User			|  <p>Должник</p>							|
+| date			| Date			|  <p>Дата</p>							|
+| type			| String			|  <p>Тип</p>							|
+| deal			| Number			|  <p>Размер</p>							|
 
 ## Delete deal
 
@@ -139,10 +142,10 @@
 | Name    | Type      | Description                          |
 |---------|-----------|--------------------------------------|
 | access_token			| String			|  <p>user access token.</p>							|
-| soul			| 			|  <p>Deal's soul.</p>							|
-| date			| 			|  <p>Deal's date.</p>							|
-| type			| 			|  <p>Deal's type.</p>							|
-| deal			| 			|  <p>Deal's deal.</p>							|
+| soul			| User			|  <p>Должник</p>							|
+| date			| Date			|  <p>Дата</p>							|
+| type			| String			|  <p>Тип</p>							|
+| deal			| Number			|  <p>Размер</p>							|
 
 # Debt
 
@@ -158,16 +161,29 @@
 | Name    | Type      | Description                          |
 |---------|-----------|--------------------------------------|
 | access_token			| String			|  <p>user access token.</p>							|
-| soul			| 			|  <p>Debt's soul.</p>							|
-| date			| 			|  <p>Debt's date.</p>							|
-| rate			| 			|  <p>Debt's rate.</p>							|
-| debt			| 			|  <p>Debt's debt.</p>							|
+| soul			| User			|  <p>Должник</p>							|
+| date			| Date			|  <p>Дата последней сделки</p>							|
+| rate			| Number			|  <p>Ставка</p>							|
+| debt			| Number			|  <p>Долг</p>							|
 
 ## Delete debt
 
 
 
 	DELETE /debts/:id
+
+
+### Parameters
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| access_token			| String			|  <p>user access token.</p>							|
+
+## История долга
+
+
+
+	GET /debts/:id/deals
 
 
 ### Parameters
@@ -219,10 +235,10 @@
 | Name    | Type      | Description                          |
 |---------|-----------|--------------------------------------|
 | access_token			| String			|  <p>user access token.</p>							|
-| soul			| 			|  <p>Debt's soul.</p>							|
-| date			| 			|  <p>Debt's date.</p>							|
-| rate			| 			|  <p>Debt's rate.</p>							|
-| debt			| 			|  <p>Debt's debt.</p>							|
+| soul			| User			|  <p>Должник</p>							|
+| date			| Date			|  <p>Дата последней сделки</p>							|
+| rate			| Number			|  <p>Ставка</p>							|
+| debt			| Number			|  <p>Долг</p>							|
 
 # User
 
@@ -257,11 +273,37 @@
 |---------|-----------|--------------------------------------|
 | access_token			| String			|  <p>User access_token.</p>							|
 
+## Я дал в долг
+
+
+
+	GET /users/bank
+
+
+### Parameters
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| access_token			| String			|  <p>User access_token.</p>							|
+
 ## Retrieve current user
 
 
 
 	GET /users/me
+
+
+### Parameters
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| access_token			| String			|  <p>User access_token.</p>							|
+
+## Мне дали в долг
+
+
+
+	GET /users/soul
 
 
 ### Parameters

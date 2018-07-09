@@ -12,13 +12,16 @@ const dealSchema = new Schema({
     required: true
   },
   date: {
-    type: Date
+    type: Date,
+    default: Date.now()
   },
   type: {
-    type: String
+    type: String,
+    default: '='
   },
   deal: {
-    type: Number
+    type: Number,
+    default: '0'
   }
 }, {
   timestamps: true,
@@ -31,11 +34,11 @@ const dealSchema = new Schema({
 })
 
 dealSchema.methods = {
-  view(full) {
+  view (full) {
     const view = {
       // simple view
       id: this.id,
-      bank: this.bank.view(full),
+      bank: this.bank.view(false),
       soul: this.soul,
       date: this.date,
       type: this.type,
