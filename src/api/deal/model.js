@@ -1,14 +1,9 @@
 import mongoose, {Schema} from 'mongoose'
 
 const dealSchema = new Schema({
-  bank: {
+  debt: {
     type: Schema.ObjectId,
-    ref: 'User',
-    required: true
-  },
-  soul: {
-    type: Schema.ObjectId,
-    ref: 'User',
+    ref: 'Debt',
     required: true
   },
   date: {
@@ -38,8 +33,7 @@ dealSchema.methods = {
     const view = {
       // simple view
       id: this.id,
-      bank: this.bank.view(false),
-      soul: this.soul,
+      debt: this.debt,
       date: this.date,
       type: this.type,
       deal: this.deal

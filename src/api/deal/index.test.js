@@ -14,20 +14,22 @@ beforeEach(async () => {
   const anotherUser = await User.create({ email: 'b@b.com', password: '123456' })
   userSession = signSync(user.id)
   anotherSession = signSync(anotherUser.id)
-  deal = await Deal.create({ bank: user })
+  deal = await Deal.create({ bank: user, soul: anotherUser })
 })
 
 test('POST /deals 201 (user)', async () => {
+  const date = Date.now()
+  const anotherUser = await User.create({ email: 'c@c.com', password: '123456' })
   const { status, body } = await request(app())
     .post(`${apiRoot}`)
-    .send({ access_token: userSession, soul: 'test', date: 'test', type: 'test', deal: 'test' })
+    .send({ access_token: userSession, soul: anotherUser, date: date, type: '=', deal: 10000 })
   expect(status).toBe(201)
   expect(typeof body).toEqual('object')
-  expect(body.soul).toEqual('test')
-  expect(body.date).toEqual('test')
-  expect(body.type).toEqual('test')
-  expect(body.deal).toEqual('test')
+  expect(body.date).toEqual(date)
+  expect(body.type).toEqual('=')
+  expect(body.deal).toEqual(10000)
   expect(typeof body.bank).toEqual('object')
+  expect(typeof body.soul).toEqual('object')
 })
 
 test('POST /deals 401', async () => {

@@ -8,7 +8,7 @@ import {schema} from './model'
 export Deal, {schema} from './model'
 
 const router = new Router()
-const {soul, date, type, deal} = schema.tree
+const {debt, date, type, deal} = schema.tree
 
 /**
  * @api {post} /deals Create deal
@@ -16,7 +16,7 @@ const {soul, date, type, deal} = schema.tree
  * @apiGroup Deal
  * @apiPermission user
  * @apiParam {String} access_token user access token.
- * @apiParam {User} soul Должник
+ * @apiParam {Debt} debt Долг
  * @apiParam {Date} date Дата
  * @apiParam {String} type Тип
  * @apiParam {Number} deal Размер
@@ -27,7 +27,7 @@ const {soul, date, type, deal} = schema.tree
  */
 router.post('/',
   token({required: true}),
-  body({soul, date, type, deal}),
+  body({debt, date, type, deal}),
   create)
 
 /**
@@ -67,7 +67,7 @@ router.get('/:id',
  * @apiGroup Deal
  * @apiPermission user
  * @apiParam {String} access_token user access token.
- * @apiParam {User} soul Должник
+ * @apiParam {Debt} debt Долг
  * @apiParam {Date} date Дата
  * @apiParam {String} type Тип
  * @apiParam {Number} deal Размер
@@ -78,7 +78,7 @@ router.get('/:id',
  */
 router.put('/:id',
   token({required: true}),
-  body({soul, date, type, deal}),
+  body({debt, date, type, deal}),
   update)
 
 /**

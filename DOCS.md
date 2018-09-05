@@ -81,7 +81,7 @@
 | Name    | Type      | Description                          |
 |---------|-----------|--------------------------------------|
 | access_token			| String			|  <p>user access token.</p>							|
-| soul			| User			|  <p>Должник</p>							|
+| debt			| Debt			|  <p>Долг</p>							|
 | date			| Date			|  <p>Дата</p>							|
 | type			| String			|  <p>Тип</p>							|
 | deal			| Number			|  <p>Размер</p>							|
@@ -142,7 +142,7 @@
 | Name    | Type      | Description                          |
 |---------|-----------|--------------------------------------|
 | access_token			| String			|  <p>user access token.</p>							|
-| soul			| User			|  <p>Должник</p>							|
+| debt			| Debt			|  <p>Долг</p>							|
 | date			| Date			|  <p>Дата</p>							|
 | type			| String			|  <p>Тип</p>							|
 | deal			| Number			|  <p>Размер</p>							|

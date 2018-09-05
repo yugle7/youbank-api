@@ -25,9 +25,8 @@ export const show = ({params}, res, next) =>
 
 export const showDeals = ({params}, res, next) =>
   Debt.findById(params.id)
-    // .populate('bank')
     .then(notFound(res))
-    .then((debt) => debt ? Deal.find({bank: debt.bank, soul: debt.soul}) : null)
+    .then((debt) => debt ? Deal.find({debt: debt}) : null)
     .then((deals) => deals ? deals.map((deal) => deal.view()) : null)
     .then(success(res))
     .catch(next)
